@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";  
+import { cookies } from "next/headers"; // Permet de récupérer les cookies en SSR
+import "./globals.css";
 import NavBar from "./components/NavBar";
- 
+import AuthPage from "./auth/page"; // Page d'authentification
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,21 +14,26 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Plateform Bancaire",
-  description: "Gestion des comptes,transactions et clients",
+export const metadata = {
+  title: "Plateforme Bancaire",
+  description: "Gestion des comptes, transactions et clients",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const cookiesList = await cookies(); 
+  const isAuthenticated = cookiesList.get("authenticated")?.value === "true"; 
+
   return (
     <html lang="fr">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <NavBar title="Plateforme Bancaire"/>
-        {children}
+        {!isAuthenticated ? (
+          <AuthPage />
+        ) : (
+          <>
+            <NavBar title="Plateforme Bancaire" />
+            {children}
+          </>
+        )}
       </body>
     </html>
   );
