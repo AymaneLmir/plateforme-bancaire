@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from "react"; 
 import { Paper, TextField, Button, Typography } from "@mui/material";
 
 type Client = {
@@ -9,6 +9,7 @@ type Client = {
   telephone: string;
   dateNaissance: string;
   adresse: string;
+  comptes: { id: string; type: string; solde: number }[]; // Ajout des comptes
 };
 
 type OmitId<T> = Omit<T, "id">;
@@ -28,9 +29,9 @@ export default function AddClientForm({ onAddClient, onEditClient, columns, clie
     telephone: "",
     dateNaissance: "",
     adresse: "",
+    comptes: [], // Initialisation des comptes
   });
 
-  
   useEffect(() => {
     if (clientToEdit) {
       setNewClient({
@@ -40,6 +41,7 @@ export default function AddClientForm({ onAddClient, onEditClient, columns, clie
         telephone: clientToEdit.telephone,
         dateNaissance: clientToEdit.dateNaissance,
         adresse: clientToEdit.adresse,
+        comptes: clientToEdit.comptes || [], // Récupération des comptes du client à modifier
       });
     }
   }, [clientToEdit]);
@@ -64,6 +66,7 @@ export default function AddClientForm({ onAddClient, onEditClient, columns, clie
       telephone: "",
       dateNaissance: "",
       adresse: "",
+      comptes: [], // Réinitialisation des comptes
     });
   };
 

@@ -6,16 +6,18 @@ import ClientsTable from "./ClientsTable";
 import AddClientForm from "./AddClientForm";
 
 type Client = {
-  id: string;
-  nom: string;
-  prenom: string;
-  email: string;
-  telephone: string;
-  dateNaissance: string;
-  adresse: string;
-};
+    id: string;
+    nom: string;
+    prenom: string;
+    email: string;
+    telephone: string;
+    dateNaissance: string;
+    adresse: string;
+    comptes: { id: string; type: string; solde: number }[]; 
+  };
+  
 
-const columns: { id: Exclude<keyof Client, "id">; label: string }[] = [
+const columns: { id: Exclude<keyof Client, "id" | "comptes">; label: string }[] = [
   { id: "nom", label: "Nom" },
   { id: "prenom", label: "Prénom" },
   { id: "email", label: "Email" },

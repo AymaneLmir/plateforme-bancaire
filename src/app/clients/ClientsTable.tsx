@@ -8,6 +8,7 @@ type Client = {
   telephone: string;
   dateNaissance: string;
   adresse: string;
+  comptes: { id: string; type: string; solde: number }[]; 
 };
 
 type ClientsTableProps = {
@@ -26,27 +27,29 @@ export default function ClientsTable({ clients, columns, onEditClient, onDeleteC
             {columns.map((column) => (
               <TableCell key={column.id}>{column.label}</TableCell>
             ))}
-            <TableCell>Actions</TableCell> 
+            <TableCell>Actions</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {clients.map((client) => (
             <TableRow key={client.id}>
               {columns.map((column) => (
-                <TableCell key={column.id}>{client[column.id]}</TableCell>
+                <TableCell key={column.id}>
+                  {renderCell(client, column.id)}
+                </TableCell>
               ))}
               <TableCell>
                 <Button
                   variant="contained"
                   color="secondary"
-                  onClick={() => onEditClient(client)} 
+                  onClick={() => onEditClient(client)}
                 >
                   Modifier
                 </Button>
                 <Button
                   variant="contained"
                   color="error"
-                  onClick={() => onDeleteClient(client.id)} 
+                  onClick={() => onDeleteClient(client.id)}
                   style={{ marginLeft: "10px" }}
                 >
                   Supprimer
@@ -58,4 +61,13 @@ export default function ClientsTable({ clients, columns, onEditClient, onDeleteC
       </Table>
     </TableContainer>
   );
+}
+
+function renderCell(client: Client, columnId: keyof Client) {
+  const value = client[columnId];
+  if (typeof value === "string" || typeof value === "number") {
+    return value;
+  } else {
+    return null;
+  }
 }
