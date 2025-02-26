@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Box, Button, Card, CardContent, Typography, Avatar, Stack, Divider } from "@mui/material";
 
-export default function Home() {
+export default function Accueil() {
   const router = useRouter();
   const [role, setRole] = useState("");
 
@@ -111,7 +111,7 @@ export default function Home() {
               textAlign="center"
               sx={{ fontFamily: "Geist Mono, monospace" }} 
             >
-              Vous pouvez consulter les comptes et assister les clients.
+              Vous avez accès à la gestion des clients,des comptes.
             </Typography>
           </Box>
         )}
