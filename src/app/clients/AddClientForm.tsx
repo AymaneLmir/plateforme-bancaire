@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"; 
 import { Paper, TextField, Button, Typography } from "@mui/material";
 
+// Définition du type Client
 type Client = {
   id: string;
   nom: string;
@@ -9,11 +10,12 @@ type Client = {
   telephone: string;
   dateNaissance: string;
   adresse: string;
-  comptes: { id: string; type: string; solde: number }[]; // Ajout des comptes
+  comptes: { id: string; type: string; solde: number }[]; 
 };
 
 type OmitId<T> = Omit<T, "id">;
 
+// Définition des propriétés du formulaire d'ajout et d'édition de clients
 type AddClientFormProps = {
   onAddClient: (client: Client) => void;
   onEditClient: (client: Client) => void;
@@ -29,9 +31,10 @@ export default function AddClientForm({ onAddClient, onEditClient, columns, clie
     telephone: "",
     dateNaissance: "",
     adresse: "",
-    comptes: [], // Initialisation des comptes
+    comptes: [], 
   });
-
+  
+  //mettre à jour l'état du formulaire lorsqu'on sélectionne un client à modifier
   useEffect(() => {
     if (clientToEdit) {
       setNewClient({
@@ -41,7 +44,7 @@ export default function AddClientForm({ onAddClient, onEditClient, columns, clie
         telephone: clientToEdit.telephone,
         dateNaissance: clientToEdit.dateNaissance,
         adresse: clientToEdit.adresse,
-        comptes: clientToEdit.comptes || [], // Récupération des comptes du client à modifier
+        comptes: clientToEdit.comptes || [], 
       });
     }
   }, [clientToEdit]);
@@ -66,13 +69,13 @@ export default function AddClientForm({ onAddClient, onEditClient, columns, clie
       telephone: "",
       dateNaissance: "",
       adresse: "",
-      comptes: [], // Réinitialisation des comptes
+      comptes: [], 
     });
   };
 
   return (
     <Paper style={{ padding: "20px", marginBottom: "20px" }}>
-      <Typography variant="h6">{clientToEdit ? "Modifier un client" : "Ajouter un client"}</Typography>
+      <Typography variant="h6" sx={{ fontFamily: "Geist Mono, monospace" }}>{clientToEdit ? "Modifier un client" : "Ajouter un client"}</Typography>
       <div style={{ display: "flex", gap: "10px", marginTop: "10px" }}>
         {columns.map((column) => (
           <TextField
@@ -84,7 +87,7 @@ export default function AddClientForm({ onAddClient, onEditClient, columns, clie
             size="small"
           />
         ))}
-        <Button variant="contained" color="primary" onClick={handleSubmit}>
+        <Button variant="contained"  onClick={handleSubmit} sx={{  backgroundColor: "#002D62", fontFamily: "Geist Mono, monospace" }}>
           {clientToEdit ? "Modifier" : "Ajouter"}
         </Button>
       </div>

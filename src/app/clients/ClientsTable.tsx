@@ -25,9 +25,9 @@ export default function ClientsTable({ clients, columns, onEditClient, onDeleteC
         <TableHead>
           <TableRow>
             {columns.map((column) => (
-              <TableCell key={column.id}>{column.label}</TableCell>
+              <TableCell key={column.id} sx={{ fontFamily: "Geist Mono, monospace" }}>{column.label}</TableCell>
             ))}
-            <TableCell>Actions</TableCell>
+            <TableCell sx={{ fontFamily: "Geist Mono, monospace" }}>Actions</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -43,6 +43,7 @@ export default function ClientsTable({ clients, columns, onEditClient, onDeleteC
                   variant="contained"
                   color="secondary"
                   onClick={() => onEditClient(client)}
+                  sx={{ fontFamily: "Geist Mono, monospace" }}
                 >
                   Modifier
                 </Button>
@@ -50,7 +51,7 @@ export default function ClientsTable({ clients, columns, onEditClient, onDeleteC
                   variant="contained"
                   color="error"
                   onClick={() => onDeleteClient(client.id)}
-                  style={{ marginLeft: "10px" }}
+                  sx={{marginLeft: "10px" ,fontFamily: "Geist Mono, monospace" }}
                 >
                   Supprimer
                 </Button>

@@ -40,7 +40,7 @@ export default function AddCompteForm({ onAddCompte, clientId }: AddCompteFormPr
 
   return (
     <Paper style={{ padding: "20px", marginBottom: "20px" }}>
-      <Typography variant="h6">Ajouter un compte</Typography>
+      <Typography variant="h6" sx={{ fontFamily: "Geist Mono, monospace" }}>Ajouter un compte</Typography>
       <div style={{ display: "flex", gap: "10px", marginTop: "10px" }}>
         <TextField
           label="Type de compte"
@@ -57,7 +57,7 @@ export default function AddCompteForm({ onAddCompte, clientId }: AddCompteFormPr
           onChange={handleInputChange}
           size="small"
         />
-        <Button variant="contained" color="primary" onClick={handleSubmit}>
+        <Button variant="contained"  onClick={handleSubmit} sx={{backgroundColor: "#002D62" ,fontFamily: "Geist Mono, monospace" }}>
           Ajouter
         </Button>
       </div>

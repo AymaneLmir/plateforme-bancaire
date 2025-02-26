@@ -1,11 +1,13 @@
 "use client";
 import { useState } from "react";
 import { mockClients } from "../mock/mockClients";
-import { Typography, Paper } from "@mui/material";
+import { Typography, Paper, Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import TransactionForm from "./TransactionForm";
 
 export default function TransactionsPage() {
   const [clients, setClients] = useState(mockClients);
+  const [expanded, setExpanded] = useState<string | false>(mockClients[0]?.id || false);
 
   const handleTransaction = (clientId: string, compteId: string, montant: number, type: "depot" | "retrait") => {
     setClients((prevClients) =>
@@ -32,27 +34,42 @@ export default function TransactionsPage() {
     );
   };
 
+  const handleChange = (panel: string) => (_: React.SyntheticEvent, isExpanded: boolean) => {
+    setExpanded(isExpanded ? panel : false);
+  };
+
   return (
     <div style={{ padding: "20px" }}>
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h4" gutterBottom sx={{ fontFamily: "Geist Mono, monospace" }}>
         Transactions des Comptes
       </Typography>
 
       {clients.map((client) => (
-        <Paper key={client.id} style={{ padding: "20px", marginBottom: "20px" }}>
-          <Typography variant="h5">{client.nom} {client.prenom}</Typography>
-
-          {client.comptes.map((compte) => (
-            <div key={compte.id}>
-              <Typography variant="h6">{compte.type} - Solde: {compte.solde}€</Typography>
-              <TransactionForm
-                clientId={client.id}
-                compteId={compte.id}
-                handleTransaction={handleTransaction}
-              />
-            </div>
-          ))}
-        </Paper>
+        <Accordion 
+          key={client.id} 
+          expanded={expanded === client.id} 
+          onChange={handleChange(client.id)}
+        >
+          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+            <Typography variant="h5" sx={{ fontFamily: "Geist Mono, monospace" }}>
+              {client.nom} {client.prenom}
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            {client.comptes.map((compte) => (
+              <Paper key={compte.id} style={{ padding: "10px", marginBottom: "10px", backgroundColor: "#D3D3D3" }}>
+                <Typography variant="h6" sx={{ fontFamily: "Geist Mono, monospace" }}>
+                  {compte.type} - Solde: {compte.solde}€
+                </Typography>
+                <TransactionForm
+                  clientId={client.id}
+                  compteId={compte.id}
+                  handleTransaction={handleTransaction}
+                />
+              </Paper>
+            ))}
+          </AccordionDetails>
+        </Accordion>
       ))}
     </div>
   );

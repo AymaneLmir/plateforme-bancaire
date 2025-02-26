@@ -50,7 +50,7 @@ export default function TransactionForm({ clientId, compteId, handleTransaction 
         
 
         <Grid item xs={12}>
-          <Button variant="contained" color="primary" onClick={handleSubmit}>
+          <Button variant="contained"sx={{ fontFamily: "Geist Mono, monospace", backgroundColor: "#002D62"}} onClick={handleSubmit}>
             Effectuer la Transaction
           </Button>
         </Grid>

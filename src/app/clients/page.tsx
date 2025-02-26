@@ -52,7 +52,7 @@ export default function ClientsPage() {
 
   return (
     <div style={{ padding: "20px" }}>
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h4" gutterBottom sx={{ fontFamily: "Geist Mono, monospace" }}>
         Liste des Clients
       </Typography>
       <AddClientForm

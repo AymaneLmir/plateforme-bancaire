@@ -8,7 +8,6 @@ interface NavBarProps {
 }
 
 const NavBar: React.FC<NavBarProps> = ({ title }) => {
-  // Définition des élements du menu
   const menuItems = [
     { label: 'Accueil', path: '/' },
     { label: 'Clients', path: '/clients' },
@@ -16,7 +15,7 @@ const NavBar: React.FC<NavBarProps> = ({ title }) => {
     { label: 'Comptes', path: '/comptes' },
   ];
   return (
-    <AppBar position="sticky" color="primary">
+    <AppBar position="sticky" sx={{ backgroundColor: "#005A9C" }}>
       <Toolbar className={styles.navBarContainer}>
         <Typography variant="h6" className={styles.navBarTitle}>
           {title}
